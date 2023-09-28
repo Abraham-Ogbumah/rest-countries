@@ -1,0 +1,129 @@
+.btn {
+    border: none;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    width: 120px;
+    padding: 0.6rem 1.8rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #AAAAAA;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px #aaaaaa;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.left-arrow {
+    margin-right: 5px;
+}
+
+.detail-container {
+    display: grid;
+    grid-template-areas: 
+        "img"
+        "content";
+    grid-template-rows: 300px 1fr;
+    gap: 0.8rem;
+}
+
+.detail-img {
+    grid-area: img;
+}
+
+.detail-content {
+    grid-area: content;
+}
+
+/* .border-list {
+  
+} */
+
+.sec-btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+.sec-btn {
+    padding: 0.7rem 1.3rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: #AAAAAA;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px #aaaaaa;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.country-info-secondary, .other-info {
+    margin-top: 3rem;
+}
+
+.other-info > h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 525px) {    
+    .country-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "main other";
+        gap: 20px;
+        align-items: center;
+    }
+
+    .info-headeer {
+        grid-area: main;
+    }
+
+    .country-info-secondary {
+        grid-area: other;
+    }
+
+    .country-info-secondary, .other-info {
+      margin-top: 1rem;
+    }
+}
+
+@media (min-width: 725px) { 
+    .detail-container {
+        grid-template-rows: 400px 1fr;
+    }
+
+    .other-info {
+        display: grid;
+        grid-template-columns: 12rem 1fr;
+        grid-template-areas: "title countries";
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .other-info > h3 {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 991px) {    
+    .detail-container {
+        grid-template-columns: 400px 1fr;
+        grid-template-areas: "image other";
+        grid-column-gap: 7rem;
+    }
+
+    .detail-img{
+        grid-area: image;
+     }
+
+     .detail-content {
+         grid-area: other;
+         display: grid;
+     }
+}

@@ -1,0 +1,37 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.searchInputs {
+    display: flex;
+    background: #fff;
+    font-size: 1.2rem;
+    padding: 0.9rem;
+    color: #AAAAAA;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #aaaaaa;
+}
+
+.searchIcon {
+    margin-right: 10px;
+}
+
+.searchInputs > input[type=text] {
+    font-size: 1rem;
+    border: none;
+    outline: none;
+}
+
+.icon-container {
+    height: 80%;
+    margin: auto 0;
+}
+
+.icon {
+    display: block;
+    margin-top: 3px;
+}
+
+::placeholder {
+    color: #AAAAAA;
+}
