@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import "./filter.css"
-import { FaSortDown } from "react-icons/fa"
-import styled from 'styled-components'
+import React, { useState } from "react";
+import "./filter.css";
+import { FaSortDown } from "react-icons/fa";
+import styled from "styled-components";
 
 const DropDownContainer = styled.div`
-    width: 80%;
-    border-radius: 10px;
-    z-index: 999;
+  width: 80%;
+  border-radius: 10px;
+  z-index: 999;
 `;
 
 const DropDownHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 1.1rem;
-    font-weight: 500;
-    font-size: 1rem;
-    color: #AAAAAA;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px #aaaaaa;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #aaaaaa;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #aaaaaa;
 `;
 
 const DropDownListContainer = styled.div``;
@@ -40,44 +40,49 @@ const DropDownList = styled.ul`
 `;
 
 const ListItem = styled.li`
-    list-style: none;
-        margin-bottom: 0.8em;
+  list-style: none;
+  margin-bottom: 0.8em;
 `;
 
-const options = ["Africa", "Americas", "Asia", "Europe", "Oceania" ]
+const options = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 function Filter(props) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
-    const toggling = () => setIsOpen(!isOpen);
+  const toggling = () => setIsOpen(!isOpen);
 
-    const onOptionClicked = value => () => {
-        setSelectedOption(value);
-        setIsOpen(false);
-        props.onFilterChange(value);
-    };
+  const onOptionClicked = (value) => () => {
+    setSelectedOption(value);
+    setIsOpen(false);
+    if (value === "All") {
+      props.onFilterChange(""); // Clear the filter for "All"
+    } else {
+      props.onFilterChange(value);
+    }
+  };
 
-    return (
-        <DropDownContainer className="filter-container">
-            <DropDownHeader onClick={toggling}>
-                <div>{selectedOption || "Filter by Region"}</div>
-                <span><FaSortDown /></span>
-            </DropDownHeader>
-            {isOpen && (
-                <DropDownListContainer>
-                    <DropDownList>
-                        {options.map(option => (
-                            <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
-                                {option}
-                            </ListItem>
-                        ))}
-                    </DropDownList>
-                </DropDownListContainer>
-            )}
-        </DropDownContainer>
-    )
+  return (
+    <DropDownContainer className="filter-container">
+      <DropDownHeader onClick={toggling}>
+        <div>{selectedOption || "Filter by Region"}</div>
+        <span>
+          <FaSortDown />
+        </span>
+      </DropDownHeader>
+      {isOpen && (
+        <DropDownListContainer>
+          <DropDownList>
+            {options.map((option) => (
+              <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
+                {option}
+              </ListItem>
+            ))}
+          </DropDownList>
+        </DropDownListContainer>
+      )}
+    </DropDownContainer>
+  );
 }
 
 export default Filter;
-
