@@ -39,7 +39,6 @@ function List() {
         return () => mounted = false;
     }, [])
     
-    // console.log(countries)
     const displayedCountries = searchedResults.length ? searchedResults : countries;
     const filteredCountries = selectedRegion ? displayedCountries.filter(country => country.region === selectedRegion) : displayedCountries;
 
