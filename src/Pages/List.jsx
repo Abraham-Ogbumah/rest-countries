@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-
 import { Link } from 'react-router-dom'
 
-// import SearchAndFilter from '../Components/SearchAndFilter'
 import SearchBar from "../components/Search/SearchBar"
 import Filter from "../components/Filter/Filter"
 import Card from '../components/Card'
@@ -13,6 +11,7 @@ function List() {
     const [countries, setCountryInfo] = useState([]);
     const [searchInput, setSearchInput] = useState("");
     const [searchedResults, setSearchedResults] = useState([]);
+    const [selectedRegion, setSelectedRegion] = useState("");
 
     const searchItems = (searchValue) => {
 
@@ -20,7 +19,7 @@ function List() {
         console.log(searchValue)
         if (searchInput !== "") {
             const searchedData = countries.filter((item) => {
-                return item.name.toLowerCase().includes(searchInput.toLowerCase())
+                return item.name.toLowerCase().includes(searchValue.toLowerCase())
             })
             setSearchedResults(searchedData)
         }
@@ -28,10 +27,6 @@ function List() {
             setSearchedResults(countries)
         }
     }
-
-    // const searchedData = countries.filter((item) => {
-    //     return Object.values(item).join("").toLowerCase().includes(searchInput.toLowerCase())
-    // })
 
     useEffect(() => {
       let mounted = true;
@@ -45,6 +40,8 @@ function List() {
     }, [])
     
     // console.log(countries)
+    const displayedCountries = searchedResults.length ? searchedResults : countries;
+    const filteredCountries = selectedRegion ? displayedCountries.filter(country => country.region === selectedRegion) : displayedCountries;
 
     return (
         <>
@@ -53,16 +50,14 @@ function List() {
                     <SearchBar 
                         handleChange={(e) => searchItems(e.target.value)}
                     />
-                    <Filter />
+                    <Filter onFilterChange={setSelectedRegion}/>
                 </div>
             </div>
 
             <div className="countries center-items">
                 <div className="card-container">
-                
-                {searchInput.length > 1 ? (
-                    searchedResults.map((item) => {
-                        const { numericCode, name, flags, population, region, capital } = item
+                    {filteredCountries.map((item) => {
+                        const {numericCode, name, flags, population, region, capital } = item;
                         return (
                             <Link to={`/country/${name}`} className="route-link" key={numericCode}>
                                 <Card 
@@ -73,24 +68,8 @@ function List() {
                                     capital={capital}
                                 />
                             </Link>
-                        )
-                    })
-                ) : (
-                    countries.map((item) => {
-                        const {numericCode, name, flags, population, region, capital } = item
-                        return (
-                            <Link to={`/country/${name}`} className="route-link" key={numericCode}>
-                                <Card 
-                                    image={flags.png}
-                                    country={name}
-                                    population={population.toLocaleString()}
-                                    region={region}
-                                    capital={capital}
-                                />
-                            </Link>
-                        )
-                    })
-                )}
+                        );
+                    })}
                 </div> 
             </div>
         </> 

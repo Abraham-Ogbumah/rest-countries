@@ -46,7 +46,7 @@ const ListItem = styled.li`
 
 const options = ["Africa", "America", "Asia", "Europe", "Oceania" ]
 
-function Filter() {
+function Filter(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -54,7 +54,7 @@ function Filter() {
 
     const onOptionClicked = value => () => {
         setSelectedOption(value);
-        setIsOpen(false);
+        props.onFilterChange(value);
     };
 
     return (
@@ -64,19 +64,19 @@ function Filter() {
                 <span><FaSortDown /></span>
             </DropDownHeader>
             {isOpen && (
-            <DropDownListContainer>
-                <DropDownList>
-                    {options.map(option => (
-                        <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
-                        {option}
-                        </ListItem>
-                    ))}
-                </DropDownList>
-            </DropDownListContainer>
+                <DropDownListContainer>
+                    <DropDownList>
+                        {options.map(option => (
+                            <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
+                                {option}
+                            </ListItem>
+                        ))}
+                    </DropDownList>
+                </DropDownListContainer>
             )}
         </DropDownContainer>
     )
 }
 
-export default Filter
+export default Filter;
 
