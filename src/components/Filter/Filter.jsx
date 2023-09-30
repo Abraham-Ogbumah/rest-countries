@@ -44,7 +44,7 @@ const ListItem = styled.li`
         margin-bottom: 0.8em;
 `;
 
-const options = ["Africa", "America", "Asia", "Europe", "Oceania" ]
+const options = ["Africa", "Americas", "Asia", "Europe", "Oceania" ]
 
 function Filter(props) {
     const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +54,7 @@ function Filter(props) {
 
     const onOptionClicked = value => () => {
         setSelectedOption(value);
+        setIsOpen(false);
         props.onFilterChange(value);
     };
 
