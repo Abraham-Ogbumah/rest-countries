@@ -95,7 +95,7 @@
 
 @media (min-width: 725px) { 
     .detail-container {
-        grid-template-rows: 400px 1fr;
+        grid-template-rows: repeat(400px 1fr);
     }
 
     .other-info {
@@ -113,7 +113,6 @@
 
 @media (min-width: 991px) {    
     .detail-container {
-        grid-template-columns: 400px 1fr;
         grid-template-areas: "image other";
         grid-column-gap: 7rem;
     }
